@@ -6,7 +6,7 @@
 public class VideoSocket {
 
 	public main(){
-		// plug MUST be of type VideoPlug
+		// plug MUST be of type VideoPlug //changes goes here
 		VideoPlug plug = new VGAPlug();
 
 		// call plug.display() 
