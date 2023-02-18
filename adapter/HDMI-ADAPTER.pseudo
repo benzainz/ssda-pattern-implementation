@@ -1,3 +1,14 @@
-public class HDMI-ADAPTER{
+public class HDMI-ADAPTER implements VideoPlug{
 
+	// constructor
+	public HDMI-ADAPTER(){
+  //instance of HDMIPlug
+   HDMIPlug plug = new HDMIPlug();
+  
+  };
+	
+	public display(int width, int height){
+		print "Displaying a " + width + " by " +
+			height + " analog image!";
+	}
 }
