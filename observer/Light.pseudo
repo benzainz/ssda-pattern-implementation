@@ -1,11 +1,25 @@
-public class Light{
-	private String color;
+public class Light implements Observer {
+  private String color;
+  private boolean isOn = false;
 
-	public Light(String color){
-		this.color = color;
-	}
+  public Light(String color) {
+    this.color = color;
+  }
 
-	// light turns on with specified color for 1 second	
-	public void turnOn(){
-	}
-}	
+ // light turns on with specified color for 1 second
+  public void turnOn() {
+    isOn = true;
+    System.out.println(color + " light turned on");
+  }
+
+  // Method to turn the light off
+  public void turnOff() {
+    isOn = false;
+    System.out.println(color + " light turned off");
+  }
+
+  // Implement the update method from the Observer interface to receive notifications from the button
+  public void update() {
+    turnOn();
+  }
+}
