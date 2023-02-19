@@ -1,35 +1,35 @@
-// get registration information from the user
-$username = $_POST['username'];
-$pw1 = $_POST['password1'];
-$pw2 = $_POST['password2'];
-
-// validate 
-if ($pw1 != $pw2 || !valid($pw1) || !valid($username))
-    return redirectBack(400);
-
-// hash password
-$pwHash = hash($pw1);
-
-$title = "<title>Welcome $username</title>";
-
+// Model
+class UserModel {
+function createUser(username, password) {
 // initialize database
-$db = getDatabase('myHost', 'mypassword', 'myDb');
-$table = "users";
+db = getDatabase('myHost', 'mypassword', 'myDb');
+table = "users";
+// hash password
+    pwHash = hash(password);
 
 // create user
-$success = $db->query("INSERT INTO $table (username, password) 
-    VALUES ($username, $pwHash);");
+    success = db->query("INSERT INTO $table (username, password) 
+        VALUES ($username, $pwHash);");
 
-if(!$success)
-    return redirectBack(500);
+    if (!success) {
+        return false;
+    }
+    return true;
+}
 
-// set up opening tag 
-if(getCurrentSeason() == 'summer');
-    $h1Style = '<h1 style="color: RED">';
-else
-    $h1Style = '<h1 style="color: BLUE">';
 
-echo "<html>
+// View
+class UserView {
+function showWelcomeMessage(username) {
+// set up opening tag
+if (getCurrentSeason() == 'summer') {
+h1Style = '<h1 style="color: RED">';
+} else {
+h1Style = '<h1 style="color: BLUE">';
+}
+    // display welcome message
+    title = "<title>Welcome $username</title>";
+    echo "<html>
             <head>
                 $title
             </head>
@@ -39,3 +39,55 @@ echo "<html>
                 </h1>
             </body>
         </html>";
+}
+
+function showError(code) {
+    if (code == 400) {
+        echo "Bad Request";
+    } else if (code == 500) {
+        echo "Internal Server Error";
+    }
+}
+
+
+// Controller
+class UserController {
+function registerUser(username, password1, password2) {
+// validate input
+if (password1 != password2 || !valid(password1) || !valid(username)) {
+view.showError(400);
+return;
+}
+// create user
+    userModel = new UserModel();
+    success = userModel.createUser(username, password1);
+
+    if (!success) {
+        view.showError(500);
+        return;
+    }
+// show welcome message
+    view = new UserView();
+    view.showWelcomeMessage(username);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
