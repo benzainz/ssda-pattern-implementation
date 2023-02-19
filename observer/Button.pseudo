@@ -1,6 +1,36 @@
-public class Button {
-
-	public void press() {
-		
-	}
+// Define the Observer interface that the Button class will use to notify the Light objects
+interface Observer {
+  void update();
 }
+
+// Define the Button class that will notify the Light objects when it is pressed
+public class Button {
+  private List<Observer> observers = new ArrayList<>();
+
+  // Add an observer to the list of observers
+  public void addObserver(Observer observer) {
+    observers.add(observer);
+  }
+
+  // Remove an observer from the list of observers
+  public void removeObserver(Observer observer) {
+    observers.remove(observer);
+  }
+
+  // Notify all observers that the button has been pressed
+  public void buttonPressed() {
+    for (Observer observer : observers) {
+      observer.update();
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
