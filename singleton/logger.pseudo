@@ -6,7 +6,7 @@ public class Logger {
 	private Logger(){
 	}
 
-	// Obtener la instancia singleton del logger
+	// Get the singleton instance of the logger
 	public static Logger getInstance() {
 		if (instance == null) {
 			instance = new Logger();
