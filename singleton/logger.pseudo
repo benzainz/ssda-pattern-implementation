@@ -1,11 +1,21 @@
+
 public class Logger {
+	private static Logger instance = null;
 	private String log;
-	// Constructor
-	public Logger(){
+	
+	private Logger(){
+	}
+
+	// Obtener la instancia singleton del logger
+	public static Logger getInstance() {
+		if (instance == null) {
+			instance = new Logger();
+		}
+		return instance;
 	}
 
 	// Log something
-	public info(String information){
+	public void info(String information){
 		this.log.append(information);
 	}
 }
